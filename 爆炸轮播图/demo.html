@@ -1,0 +1,109 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>爆炸轮播图</title>
+<style>
+  html{ 
+    overflow:hidden;
+  }
+  body{ 
+    background:#000;
+  }
+  #box{ 
+    position:relative;
+    width:700px; 
+    height:400px;
+    background:url(img/1.jpg)  no-repeat; 
+    margin:200px auto;
+    perspective: 500px;
+  }
+
+  #box span{
+    position:absolute;
+    left:0;
+    top:0; 
+    background:url(img/0.jpg)  no-repeat;
+    background-position:0 0; 
+    opacity:1;
+  }
+
+</style>
+ <script>
+   window.onload = function() {
+     //  第一步先给box划分添加28个小方块.700 * 400 每个小方块是 100* 100  4* 7  = 28
+    //  for 循环 创建很多的小span
+    // 获取元素
+    var box  = document.getElementById("box");
+    var music = document.getElementById("music");
+    var rows = 4;   // 有 4行
+    var columns = 7; // 有7列
+    for(var i =0; i< rows; i++) {  //  4 行   i  控制行
+      for(var j = 0 ; j< columns; j++) {   // 7列   j 控制列
+        // 创建节点 span
+       var ospan = document.createElement("span");
+       // 盒子的宽度是box的宽度700除以列数7  ==  100
+       ospan.style.width = box.offsetWidth / columns + "px";
+       ospan.style.height = box.offsetHeight / rows + "px";
+       box.appendChild(ospan);
+       //  计算盒子的位置。位置一定要在添加完毕之后才能计算
+       //  站在每一行的角度 来看   一行  让每个小盒子 的  宽度 乘以   每一行小盒子的索引号
+       ospan.style.left = ospan.offsetWidth * j + "px";
+       ospan.style.top = ospan.offsetHeight * i + "px";
+
+       // 调整每个小span的背景位置。让每个小 span 背景位置 往左 走 距离
+       ospan.style.backgroundPosition = -ospan.offsetLeft + "px " + -ospan.offsetTop + "px";
+       //backgroundPosition = "-10px -10px"   注意空格
+      }
+
+    }
+    var iNow = 0 ;  // 控制图片的播放张数
+    // 点击事件开始
+    // 单击box
+    box.onclick = function() {
+     // 1.  spans 会加载当前的 图片,同时清零以前的样式
+     // 声音模块
+     music.load();  // 先加载
+     music.volume = 0.6;  // 控制音量大小      0~1
+     music.play();  // 后播放
+
+     var spans = box.children;  //获得28个span
+     for(var i = 0 ;i<spans.length; i++ ) {   //每个span都有背景。遍历
+        spans[i].style.backgroundImage = "url(img/"+ iNow +".jpg)";
+        spans[i].style.opacity = 1;
+        spans[i].style.transform = "none";
+        spans[i].style.transition = "none";
+     }
+
+     ++iNow == 3  ? iNow = 0 : iNow;  // 满3张图片时（总共三张图片），从头开始
+     // 2. box 背景 会换成下一张
+     box.style.backgroundImage = "url(img/"+ iNow +".jpg)";
+     // 3. spans 爆炸开效果执行   还需要遍历
+     for(var i = 0;i < spans.length; i++){
+        (function(obj){
+           setTimeout(function(){  
+             obj.style.opacity =  0;
+             obj.style.transition = "all 1s";   // 过渡写在本身上
+             // 计算每个小盒子的移动 位置 ：
+             // 盒子宽度的一半 +  小盒子 距离 左侧的距离    减去 box 盒子宽度的一半
+            // 公式的由来    因为有 7排  前三列往左边爆炸   后   3列 往右边爆炸走
+            var  x = obj.offsetWidth / 2 +  obj.offsetLeft - box.offsetWidth / 2;
+            var  y = obj.offsetHeight / 2 +  obj.offsetTop - box.offsetHeight / 2;
+            var rotatex = parseInt(Math.random() * 180);
+            var rotatey = parseInt(Math.random() * 180);
+            obj.style.transform = "translate("+x+"px,"+y+"px) rotateX("+rotatex+"deg) rotateY("+rotatey+"deg)";
+           },30);  //
+
+        })(spans[i])   //  把 spans[i] 给 obj
+     }
+    }
+   }
+ </script>
+</head>
+
+<body>
+<div id="box">
+</div>
+<audio src="music.mp3" id="music"></audio>
+</body>
+</html>
