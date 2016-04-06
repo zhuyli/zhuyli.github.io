@@ -14,7 +14,7 @@ body {
     font-size:4em;
     text-shadow: 2px 2px 0 #9BDED2;
 }
-/*Çå³ı¸¡¶¯*/
+/*æ¸…é™¤æµ®åŠ¨*/
 .clearfix::before,.clearfix::after {
     content: ".";
     height: 0;
@@ -25,14 +25,14 @@ body {
 }
 
 
-/*µÚÒ»ÆÁ*/
+/*ç¬¬ä¸€å±*/
 .section1 {
     overflow: hidden;
 }
 .logo {
     width: 200px;
     height: 200px;
-    background:  url(../images/zyl2.jpg) no-repeat left -32px;
+    background:  url(./images/zhuyli.jpg) no-repeat left -32px;
     background-size: cover;
     margin:50px auto 30px;
     border:5px solid #ADE0D7;
@@ -48,7 +48,7 @@ body {
     color:#fff;
     position: relative;
 }
-    /*µÚÒ»ÆÁ¶¯»­*/
+    /*ç¬¬ä¸€å±åŠ¨ç”»*/
 .wenzi span {
     font-size:3.5em;
     margin:0 30px;
@@ -81,7 +81,7 @@ body {
     font-size:20px;
 }
 
-/*µÚ¶şÆÁ*/
+/*ç¬¬äºŒå±*/
 .section2 {
     padding:0 150px;
 }
@@ -127,7 +127,7 @@ body {
     font-size:20px;
 }
 
-/*µÚÈıÆÁ*/
+/*ç¬¬ä¸‰å±*/
 .section3 {
     padding: 0 130px;
     position: relative;
@@ -206,7 +206,7 @@ body {
    background-color:#11b99f ;
 }
 
-/*µÚËÄÆÁ*/
+/*ç¬¬å››å±*/
 .section4 {
     padding:0 100px;
     overflow: hidden;
@@ -282,7 +282,7 @@ body {
     line-height: 30px;
 }
 
-/*µÚÎåÆÁ*/
+/*ç¬¬äº”å±*/
 .section5 {
     overflow: hidden;
 }
