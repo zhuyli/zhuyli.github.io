@@ -29,10 +29,11 @@ body {
 .section1 {
     overflow: hidden;
 }
+
 .logo {
     width: 200px;
     height: 200px;
-    background:  url(../images/zhuyli.jpg) no-repeat center;
+    background:  url(../images/zhuyli.jpg) no-repeat;
     background-size: cover;
     margin:50px auto 30px;
     border:5px solid #ADE0D7;
